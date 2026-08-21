@@ -24,7 +24,15 @@ def log_mlflow(config: dict, params: dict, metrics: dict, model) -> bool:
     with mlflow.start_run():
         mlflow.log_params(params)
         mlflow.log_metrics(metrics)
-        mlflow.sklearn.log_model(model, "model")
+        # MLflow 3 usa skops por defecto. Este pipeline de scikit-learn/imblearn
+        # contiene numpy.dtype, que skops puede marcar como tipo no confiable.
+        # Para este ejercicio académico usamos cloudpickle explícitamente, que
+        # además mantiene compatibilidad con las versiones de MLflow del curso.
+        mlflow.sklearn.log_model(
+            model,
+            artifact_path="model",
+            serialization_format="cloudpickle",
+        )
     return True
 
 

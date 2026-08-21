@@ -1,8 +1,6 @@
 # Caso MLOps — Renovación de Préstamo
 
-Proyecto académico que lleva el caso de **renovación de préstamo** desde un notebook hasta un flujo MLOps sencillo y reproducible.
-
-> **Supuesto pendiente de validar con negocio:** el material usa `FLAG_VENTA=1` como clase positiva. Para el ejercicio se interpreta como venta/renovación y `0` como no venta/no renovación.
+Proyecto de **renovación de préstamo** desde un notebook hasta un flujo MLOps.
 
 ## 1. Objetivo
 
@@ -12,9 +10,6 @@ El dataset contiene 87,556 registros y 22 columnas. La clase positiva representa
 
 ## 2. Qué conceptos de las clases de MLOps aplica
 
-1. Estructura reproducible de proyecto.
-2. Validación de datos.
-3. Preprocesamiento dentro de `Pipeline` para evitar data leakage.
 4. Split temporal train/validation/test.
 5. Manejo de desbalance con `class_weight` y SMOTE.
 6. Comparación de modelos: Logistic Regression y Random Forest.
@@ -185,13 +180,6 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Windows PowerShell:
-
-```powershell
-python -m venv .venv
-.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-```
 
 ### Validar datos
 
@@ -258,18 +246,6 @@ Compara enero-junio contra septiembre y genera reportes en `reports/monitoring/`
 ## 8. DVC
 
 Se incluye el descriptor `.dvc` del dataset como ejemplo del curso.
-
-En un proyecto real, el CSV normalmente **no se sube a Git**; se configura un remote S3/GCS/Azure/MinIO y se ejecuta:
-
-```bash
-dvc add "data/raw/Dataset Renovacion_prestamo.csv"
-dvc remote add -d storage <REMOTE>
-dvc push
-git add data/raw/Dataset\ Renovacion_prestamo.csv.dvc .gitignore .dvc/config
-git commit -m "Version dataset with DVC"
-```
-
-Para que este ZIP académico sea autocontenido, el CSV también se entrega físicamente.
 
 El `dvc.yaml` muestra dos etapas: `validate` y `train`.
 

@@ -16,7 +16,7 @@ score:
 	PYTHONPATH=. python scripts/score_batch.py --input "data/raw/Dataset Renovacion_prestamo.csv"
 
 api:
-	PYTHONPATH=. uvicorn api.main:app --reload
+	PYTHONPATH=. uvicorn api.main:app --reload --port 8001
 
 monitor:
 	PYTHONPATH=. python scripts/monitor.py --month 201509
