@@ -105,7 +105,7 @@ Para cada variable numérica calcula:
 - PSI: cambio de distribución.
 - KS p-value: prueba estadística de cambio de distribución.
 
-El script intenta además generar un reporte Evidently si la versión instalada lo permite. Si Evidently no está disponible, PSI y KS continúan funcionando.
+El script intenta generar un reporte Evidently si la versión instalada lo permite. Si Evidently no está disponible, PSI y KS continúan funcionando.
 
 ### `PredictionRequest` — `api/main.py`
 
@@ -117,8 +117,6 @@ Respuesta de la API:
 
 - `score_renovacion`: probabilidad estimada.
 - `prediccion`: 1 si score >= 0.5, de lo contrario 0.
-
-Para campañas se recomienda usar principalmente el **score y ranking**, no solo la clase.
 
 ## 5. Flujo de entrenamiento
 
@@ -166,8 +164,6 @@ quality_gate:
 
 Si el modelo final no los supera, `scripts/train.py` termina con error. En GitHub Actions eso hace fallar el workflow.
 
-Estos umbrales son académicos y deben ajustarse con negocio en un proyecto real.
-
 ## 7. Ejecución local
 
 ### Crear ambiente
@@ -208,7 +204,7 @@ Genera:
 
 ### Abrir MLflow
 
-Si MLflow está instalado, el entrenamiento registra el run en `mlflow.db`.
+El entrenamiento registra el run en `mlflow.db`.
 
 ```bash
 mlflow ui --backend-store-uri sqlite:///mlflow.db --port 5000
@@ -245,7 +241,7 @@ Compara enero-junio contra septiembre y genera reportes en `reports/monitoring/`
 
 ## 8. DVC
 
-Se incluye el descriptor `.dvc` del dataset como ejemplo del curso.
+Se incluye el descriptor `.dvc` del dataset
 
 El `dvc.yaml` muestra dos etapas: `validate` y `train`.
 
@@ -271,7 +267,7 @@ docker compose down
 
 ## 10. GitHub Actions
 
-Hay tres Actions deliberadamente simples.
+Hay tres Actions simples.
 
 ### Action 1: `CI` — `.github/workflows/ci.yml`
 
@@ -324,11 +320,11 @@ git push
 
 **Cómo ejecutarlo:**
 
-GitHub → **Actions** → **Train model** → **Run workflow**.
+GitHub -> **Actions** -> **Train model** -> **Run workflow**.
 
 Si PR-AUC, ROC-AUC o Lift@10% están debajo de los umbrales, el Action falla. Ese es el quality gate de ML.
 
-### Action 3: `Monitor drift` — `.github/workflows/monitor.yml`
+### Action 3: `Monitor drift` - `.github/workflows/monitor.yml`
 
 **Cuándo se ejecuta:**
 
