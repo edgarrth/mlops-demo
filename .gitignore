@@ -9,3 +9,4 @@ artifacts/*.joblib
 artifacts/*.csv
 reports/*.csv
 reports/monitoring/*
+artifacts/*.json

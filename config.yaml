@@ -1,7 +1,7 @@
 project_name: renovacion-prestamo-mlops
 
 data:
-  path: data/raw/Dataset Renovacion_prestamo.csv
+  path: data/original/Dataset Renovacion_prestamo.csv
   target: FLAG_VENTA
   id_column: CLIENTE
   time_column: MES

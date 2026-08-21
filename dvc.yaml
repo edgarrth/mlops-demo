@@ -2,12 +2,12 @@ stages:
   validate:
     cmd: PYTHONPATH=. python scripts/validate_data.py
     deps:
-      - data/raw/Dataset Renovacion_prestamo.csv
+      - data/original/Dataset Renovacion_prestamo.csv
       - scripts/validate_data.py
   train:
     cmd: PYTHONPATH=. python scripts/train.py
     deps:
-      - data/raw/Dataset Renovacion_prestamo.csv
+      - data/original/Dataset Renovacion_prestamo.csv
       - src
       - scripts/train.py
       - config.yaml

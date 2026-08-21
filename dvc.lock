@@ -1,0 +1,49 @@
+schema: '2.0'
+stages:
+  validate:
+    cmd: PYTHONPATH=. python scripts/validate_data.py
+    deps:
+    - path: data/original/Dataset Renovacion_prestamo.csv
+      hash: md5
+      md5: 3beef844ebc3d6caa3e0facfcbc14689
+      size: 8931339
+      isexec: true
+    - path: scripts/validate_data.py
+      hash: md5
+      md5: 2c38c49cc417fcbb85891ee0d551723f
+      size: 189
+      isexec: true
+  train:
+    cmd: PYTHONPATH=. python scripts/train.py
+    deps:
+    - path: config.yaml
+      hash: md5
+      md5: 7ff9ad51bcb61ce1be80daee93b009dd
+      size: 554
+      isexec: true
+    - path: data/original/Dataset Renovacion_prestamo.csv
+      hash: md5
+      md5: 3beef844ebc3d6caa3e0facfcbc14689
+      size: 8931339
+      isexec: true
+    - path: scripts/train.py
+      hash: md5
+      md5: 2c8ed0c9c676d6a794d05e6b56896db0
+      size: 4078
+      isexec: true
+    - path: src
+      hash: md5
+      md5: 3d4c354c6069b62a092c516a7bf3ffc0.dir
+      size: 26434
+      nfiles: 12
+    outs:
+    - path: artifacts/metrics.json
+      hash: md5
+      md5: 2fd389a635c7c8692e437001e852c61d
+      size: 905
+      isexec: true
+    - path: artifacts/model.joblib
+      hash: md5
+      md5: 7c118a91162a611b89a546df37ef30fd
+      size: 1574785
+      isexec: true

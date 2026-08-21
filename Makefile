@@ -13,7 +13,7 @@ train:
 	PYTHONPATH=. python scripts/train.py
 
 score:
-	PYTHONPATH=. python scripts/score_batch.py --input "data/raw/Dataset Renovacion_prestamo.csv"
+	PYTHONPATH=. python scripts/score_batch.py --input "data/original/Dataset Renovacion_prestamo.csv"
 
 api:
 	PYTHONPATH=. uvicorn api.main:app --reload --port 8001
