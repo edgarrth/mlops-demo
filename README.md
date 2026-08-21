@@ -1,4 +1,4 @@
-# Caso MLOps — Renovación de Préstamo
+# Caso MLOps - Renovación de Préstamo
 
 Proyecto de **renovación de préstamo** desde un notebook hasta un flujo MLOps.
 
@@ -346,68 +346,3 @@ Si PR-AUC, ROC-AUC o Lift@10% están debajo de los umbrales, el Action falla. Es
 **Cómo ejecutarlo:**
 
 GitHub → **Actions** → **Monitor drift** → **Run workflow**.
-
-En producción el CSV de septiembre sería reemplazado por datos nuevos de campañas reales.
-
-## 11. Por qué GitHub Actions sí aporta valor
-
-```text
-Desarrollador
-    ↓ push / PR
-CI
-    ↓
-tests + data validation
-    ↓
-main
-    ↓
-Train model
-    ↓
-quality gate
-    ↓
-modelo + API smoke test
-    ↓
-artifacts
-
-cada lunes
-    ↓
-Monitor drift
-    ↓
-PSI + KS + Evidently
-```
-
-Así GitHub Actions no está puesto solo “porque lo pide la clase”: automatiza calidad, entrenamiento y monitoreo.
-
-## 12. Qué NO se sobrecomplicó
-
-Para mantener un nivel razonable de estudiante:
-
-- no se agregó Kubernetes;
-- no se agregó Terraform;
-- no hay Feature Store;
-- no hay un registry propio;
-- no hay microservicios innecesarios;
-- no se despliega a un cloud provider;
-- no se implementó un retraining automático complejo.
-
-El objetivo es demostrar correctamente los conceptos del curso con código que pueda explicarse de principio a fin.
-
-## 13. Archivos originales
-
-`references/original/` conserva los archivos entregados para poder comparar la solución MLOps con el notebook original y el material del caso.
-
-
-## 13. Validación realizada antes de la entrega
-
-Antes de generar el ZIP se ejecutaron localmente las partes que permite el entorno de construcción:
-
-- `pytest -q`: **5/5 tests pasaron**.
-- validación del dataset: **87,556 filas, 22 columnas y 3.99% de positivos**.
-- entrenamiento completo + quality gate: **PASSED**.
-- test final (201509): PR-AUC ≈ **0.0829**, ROC-AUC ≈ **0.6835**, Lift@10% ≈ **2.53x**.
-- batch scoring: ranking generado para **87,556 clientes**.
-- monitoreo PSI/KS: ejecutado correctamente para 201509.
-- FastAPI: `/health` respondió `200` con `status=ok` y `/predict` devolvió un score válido.
-- los tres YAML de GitHub Actions fueron parseados correctamente.
-- el hash y tamaño declarados en el archivo `.dvc` coinciden con el CSV incluido.
-
-El entorno usado para empaquetar no dispone de daemon Docker ni de acceso a Internet para instalar paquetes que no vienen preinstalados. Por eso no se pudo ejecutar aquí `docker compose up`, ni instalar MLflow/DVC/Evidently para probar sus comandos CLI. El código deja Evidently como complemento opcional y los GitHub Actions instalan las dependencias desde `requirements.txt` en un runner con acceso a Internet. Dockerfile y Compose quedan incluidos para ejecutarlos en una máquina con Docker.
