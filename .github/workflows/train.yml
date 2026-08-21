@@ -8,7 +8,7 @@ on:
       - 'src/**'
       - 'scripts/**'
       - 'config.yaml'
-      - 'data/raw/**'
+      - 'data/original/**'
 
 jobs:
   train:
