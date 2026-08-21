@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+      - name: Validar sintaxis
+        run: python -m compileall -q src api scripts tests
+      - name: Ejecutar tests
+        run: PYTHONPATH=. pytest --cov=src --cov=api --cov-report=term-missing
+      - name: Validar dataset
+        run: PYTHONPATH=. python scripts/validate_data.py
